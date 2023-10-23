@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Recognition</title>
+</head>
+<body>
+    <h1>Emotion Recognition</h1>
+
+    <!-- Video frame to display the webcam feed -->
+    <img id="video_frame" src="{{ url_for('video') }}" width="640" height="480" style="border: 2px solid black;" />
+
+    <!-- Recommended links based on emotions -->
+    <h2>Recommended Links</h2>
+    <ul>
+        {% for link in recommended_links %}
+        <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function updateVideoFrame() {
+            document.getElementById('video_frame').src = "{{ url_for('video') }}?" + new Date().getTime();
+            requestAnimationFrame(updateVideoFrame);  // Request the next frame update
+        }
+
+        // Start updating the video frame
+        updateVideoFrame();
+    </script>
+</body>
+</html>
